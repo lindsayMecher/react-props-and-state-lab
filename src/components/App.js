@@ -19,13 +19,9 @@ class App extends React.Component {
 
   constructURL = () => {
     const { type } = this.state.filters
+    const queryString = `?type=${type}`
     let finalURL = ""
-    if (type === "all") {
-      finalURL = PETS_ENDPOINT
-    } else {
-      const queryString = `?type=${type}`
-      finalURL = PETS_ENDPOINT + queryString
-    }
+    type === "all" ? finalURL = PETS_ENDPOINT : finalURL = PETS_ENDPOINT + queryString
     return finalURL
   }
 
@@ -41,7 +37,6 @@ class App extends React.Component {
   }
 
   onChangeType = (e) => {
-    console.log(e.target.value)
     this.setState({
       filters: {
         ...this.state.filters,
@@ -62,10 +57,6 @@ class App extends React.Component {
   }
 
   onAdoptPet = (id) => {
-    console.log("adopting", id)
-    // find pet with this id
-    // update isAdopted to true
-    // set state
     const petToUpdate = this.state.pets.find(pet => pet.id === id)
     const idx = this.state.pets.indexOf(petToUpdate)
     const newState = {
@@ -83,7 +74,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.pets)
     return (
       <div className="ui container">
         <header>
@@ -92,7 +82,7 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters pets={this.state.pets} filters={this.state.filters} onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
+              <Filters pets={this.state.pets} onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
               <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet} />
