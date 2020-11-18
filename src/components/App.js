@@ -60,6 +60,7 @@ class App extends React.Component {
     const petToUpdate = this.state.pets.find(pet => pet.id === id)
     const idx = this.state.pets.indexOf(petToUpdate)
     const newState = {
+      ...this.state,
       pets: [
         ...this.state.pets.slice(0, idx),
         {
