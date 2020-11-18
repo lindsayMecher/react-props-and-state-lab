@@ -59,8 +59,7 @@ class App extends React.Component {
   onAdoptPet = (id) => {
     const petToUpdate = this.state.pets.find(pet => pet.id === id)
     const idx = this.state.pets.indexOf(petToUpdate)
-    const newState = {
-      ...this.state,
+    this.setState({
       pets: [
         ...this.state.pets.slice(0, idx),
         {
@@ -69,9 +68,7 @@ class App extends React.Component {
         },
         ...this.state.pets.slice(idx + 1)
       ]
-      
-    }
-    this.setState(newState)
+    })
   }
 
   render() {
