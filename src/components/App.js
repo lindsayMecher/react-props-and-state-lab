@@ -56,18 +56,43 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
+  // onAdoptPet = (id) => {
+  //   const petToUpdate = this.state.pets.find(pet => pet.id === id)
+  //   const idx = this.state.pets.indexOf(petToUpdate)
+  //   this.setState({
+  //     pets: [
+  //       ...this.state.pets.slice(0, idx),
+  //       {
+  //         ...this.state.pets[idx],
+  //         isAdopted: true
+  //       },
+  //       ...this.state.pets.slice(idx + 1)
+  //     ]
+  //   })
+  // }
+
+  // onAdoptPet = (id) => {
+  //   const updatedPetsArray = this.state.pets.map(petObj => {
+  //     if (petObj.id === id) {
+  //       return {
+  //         ...petObj,
+  //         isAdopted: true
+  //       }
+  //     } else {
+  //         return petObj
+  //       }
+  //   })
+  //   this.setState({
+  //     pets: updatedPetsArray
+  //   })
+  // }
+
   onAdoptPet = (id) => {
-    const petToUpdate = this.state.pets.find(pet => pet.id === id)
-    const idx = this.state.pets.indexOf(petToUpdate)
+    const updatedPetsArray = this.state.pets.map(petObj => {
+      petObj.id === id ? { ...petObj, isAdopted: true } : petObj
+    })
     this.setState({
-      pets: [
-        ...this.state.pets.slice(0, idx),
-        {
-          ...this.state.pets[idx],
-          isAdopted: true
-        },
-        ...this.state.pets.slice(idx + 1)
-      ]
+      pets: updatedPetsArray
     })
   }
 
